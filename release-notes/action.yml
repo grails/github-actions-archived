@@ -1,0 +1,24 @@
+name: 'Micronaut release notes action'
+description: 'Updates a draft release notes on every PR merge'
+inputs:
+  token:
+    description: 'GitHub token to authenticate the requests'  
+    required: true
+    default: ${{ github.token }}
+  repository:
+    description: 'Repository in org/repo format'
+    required: true
+    default: ${{ github.repository }}
+  branch:
+    description: 'Branch to target'
+    required: true
+    default: master
+outputs:
+  next_version:
+    description: The next version to release
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.token }}
+    - ${{ inputs.repository }}
